@@ -2,7 +2,7 @@
 // const Model = require('clarifai-nodejs');
 
 // const app = new Clarifai.App({
-//   apiKey: '5372eeb8692f4e59954de38f12f3dc34',
+//   apiKey: '',
 // });
 
 import pkg from 'clarifai-nodejs';
