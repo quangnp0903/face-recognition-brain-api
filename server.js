@@ -16,14 +16,22 @@ import { handleSignin } from './controllers/signin.js';
 import { handleProfileGet } from './controllers/profile.js';
 import { handleImage, handleApiCall } from './controllers/image.js';
 
-const db = knex({
+/* const db = knex({
   client: 'pg',
   connection: {
-    host: 'postgresql-clean-05159', // postgresql-clean-05159, 127.0.0.1
+    host: '127.0.0.1',
     // port: 5432,
     user: 'postgres',
     password: 'test',
     database: 'smart-brain',
+  },
+}); */
+
+const db = knex({
+  client: 'pg',
+  connection: {
+    host: process.env.DATABASE_URL,
+    ssl: true,
   },
 });
 
