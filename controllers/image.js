@@ -6,6 +6,7 @@
 // });
 
 import pkg from 'clarifai-nodejs';
+
 const { Model } = pkg;
 
 const handleApiCall = async (req, res) => {

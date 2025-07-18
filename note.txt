@@ -1,0 +1,14 @@
+docker exec -it postgres psql -U postgres -c '\l'
+
+- In some cases, psql in the docker container has been conflicted with psql installed on local machine, therefore
+default port 5432 of psql is conflicted from both side(Docker and Local Machine). In my case, I had to change
+the port 5432 from my docker-compose.yml file to 15432 to avoid conflicts. (15432: 5432). Please note that,
+Docker works like a virtual machine, so it has own software installed inside of it.
+
+ChatGPT version of my guidance:
+- When running PostgreSQL in Docker, it may conflict with a PostgreSQL service already installed on your host 
+machine, as both typically use the default port 5432. To avoid this, I updated the docker-compose.yml configuration 
+to map Docker's internal port 5432 to an alternate host port (e.g., 15432:5432). This way, I can connect to the 
+Dockerized database on port 15432 from my host without interfering with the local PostgreSQL service. Keep in mind 
+that Docker containers are isolated environments — like mini virtual machines — and come with their own software, 
+including psql, fully contained within the container.

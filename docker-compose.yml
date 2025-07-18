@@ -1,0 +1,41 @@
+# version: 'v2.34.0-desktop.1'
+
+services:
+  # Redis
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - '6379:6379'
+  # Postgres
+  postgres:
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test
+      POSTGRES_URL: postgres://postgres:test@localhost:5432/smart-brain-docker
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports:
+      - '15432:5432'
+
+  # Backend API
+  face-recognition-brain-api:
+    container_name: backend
+    build: ./
+    volumes:
+      - ./:/usr/src/face-recognition-brain-api
+      # - ./:/usr/src/face-recognition-brain-api/wait-for-it.sh:/wait-for-it.sh
+    command: npm start
+    working_dir: /usr/src/face-recognition-brain-api
+    environment:
+      POSTGRES_URI: postgres://postgres:test@postgres:5432/smart-brain-docker
+      REDIS_URI: redis://redis:6379
+    # links:
+    #   - postgres
+    depends_on:
+      - redis
+    # entrypoint: ['/wait-for-it.sh', 'redis', '6379', '--', 'npm', 'start']
+    ports:
+      - '3001:3001'

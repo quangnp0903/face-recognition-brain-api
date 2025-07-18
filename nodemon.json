@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "server.js",
+    "controllers"
+  ],
+  "ext": "js,json",
+  "ignore": [
+    "node_modules"
+  ]
+}
